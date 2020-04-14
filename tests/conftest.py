@@ -58,7 +58,7 @@ def db_session(app: FastAPI) -> Generator[Session, Any, None]:
 
 
 @pytest.fixture()
-def client(app: FastAPI, db_session: Session) -> Generator[Session, Any, None]:
+def client(app: FastAPI, db_session: Session) -> Generator[TestClient, Any, None]:
     """
     Create a new FastAPI TestClient that uses the `db_session` fixture to override
     the `get_db` dependency that is injected into routes.
