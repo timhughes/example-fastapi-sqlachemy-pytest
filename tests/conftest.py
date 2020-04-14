@@ -23,7 +23,7 @@ Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 @pytest.fixture(autouse=True)
-def app() -> Generator[FastAPI, Any, None]:
+def app() -> Generator[FastAPI]:
     """
     Create a fresh database on each test case.
     """
@@ -34,7 +34,7 @@ def app() -> Generator[FastAPI, Any, None]:
 
 
 @pytest.fixture
-def db_session(app: FastAPI) -> Generator[Session, Any, None]:
+def db_session(app: FastAPI) -> Generator[Session]:
     """
     Creates a fresh sqlalchemy session for each test that operates in a
     transaction. The transaction is rolled back at the end of each test ensuring
@@ -58,7 +58,7 @@ def db_session(app: FastAPI) -> Generator[Session, Any, None]:
 
 
 @pytest.fixture()
-def client(app: FastAPI, db_session: Session) -> Generator[Session, Any, None]:
+def client(app: FastAPI, db_session: Session) -> Generator[TestClient]:
     """
     Create a new FastAPI TestClient that uses the `db_session` fixture to override
     the `get_db` dependency that is injected into routes.
