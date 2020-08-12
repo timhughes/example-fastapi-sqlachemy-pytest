@@ -18,11 +18,10 @@ def item_create(
         db: Session = Depends(get_db),
         item_in: ItemCreateSchema,
 ):
-    item = crud.item.create(
+    return crud.item.create(
         db_session=db,
         obj_in=item_in,
     )
-    return item
 
 
 @router.get("/{slug}", response_model=ItemSchema, name="item:get")
