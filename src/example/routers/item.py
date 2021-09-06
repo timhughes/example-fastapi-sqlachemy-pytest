@@ -13,7 +13,7 @@ logger = logging.getLogger('example')
 
 
 @router.post("/", response_model=ItemSchema, name="item:create")
-def item_create(
+async def item_create(
         *,
         db: Session = Depends(get_db),
         item_in: ItemCreateSchema,
@@ -25,7 +25,7 @@ def item_create(
 
 
 @router.get("/{slug}", response_model=ItemSchema, name="item:get")
-def item_get(
+async def item_get(
         *,
         db: Session = Depends(get_db),
         slug: str,
@@ -34,7 +34,7 @@ def item_get(
 
 
 @router.put("/{slug}", response_model=ItemSchema, name="item:update")
-def item_update(
+async def item_update(
         *,
         db: Session = Depends(get_db),
         slug: str,
@@ -43,7 +43,7 @@ def item_update(
 
 
 @router.delete("/{slug}", name="item:archive")
-def item_archive(
+async def item_archive(
         *,
         db: Session = Depends(get_db),
         slug: str,
